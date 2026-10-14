@@ -1,0 +1,89 @@
+<misterromdescription>
+    <rotation>horizontal</rotation>
+    <name>Jackie Chan in Fists of Fire</name>
+    <setname>jchan2</setname>
+    <mameversion>0289</mameversion>
+    <year>1995</year>
+    <manufacturer>Kaneko</manufacturer>
+    <players>2</players>
+    <joystick>8</joystick>
+    <rbf>jchan</rbf>
+    <platform>Kaneko</platform>
+
+    <!--
+      ROM stream for the Jackie Chan core (tools/make_mra.py; the core remaps it into the SDRAM image of docs/memory.md as it arrives):
+        0x0000000  0x200000   maincpu  (68000 program, 16-bit big-endian words: the even byte is the first ROM)
+        0x0200000  0x100000   sub      (sub 68000 program)
+        0x0300000  0x100000   view2    (VIEW2 tile ROM)
+        0x0400000  0x340000   ymz      (YMZ280B samples, compact: MAME region 0x000000-0x0fffff, 0x200000-0x3fffff, 0x400000-0x43ffff)
+        0x0740000  0x1800000  spritegen1 (SPA sprite ROM, 24 MB window)
+        0x1F40000  0x400000   spritegen2 (SPB sprite ROM)
+        0x2340000  0x010000   mcudata  (toybox data ROM, upper 64 KB)
+
+      Expects the MAME 0.289 merged romset or the split sets: parts are found by name and CRC.
+      DIP switches (ioctl index 254): one byte, SW1:1-8 as MAME's DSW1 port (bit 0 = SW1:1); a 1 is MAME's default setting.
+      The EEPROM (93C46, 128 bytes) is saved by the core after the game stored it (nvram index 2).
+    -->
+    <switches default="DB" base="16">
+        <dip bits="0" name="Service Mode" ids="On,Off"/>
+        <dip bits="1" name="Flip Screen" ids="On,Off"/>
+        <dip bits="2" name="Demo Sounds" ids="On,Off"/>
+        <dip bits="3" name="Sound" ids="Mono,Stereo"/>
+        <dip bits="4" name="Free Play" ids="On,Off"/>
+        <dip bits="5" name="Blood Mode" ids="High,Normal"/>
+        <dip bits="6" name="Unused" ids="On,Off"/>
+        <dip bits="7" name="Buttons Layout" ids="2+2,3+1"/>
+    </switches>
+
+    <buttons names="Button 1,Button 2,Button 3,Button 4,Start,Coin" default="A,B,X,Y,Start,Select" count="4"/>
+
+    <rom index="0" zip="jchan2.zip" md5="None" address="0x32000000">
+
+        <!-- maincpu -->
+        <interleave output="16">
+            <part name="j2p1x2.u68" crc="52104ab9" map="01"/>
+            <part name="j2p1x1.u67" crc="5448c4bc" map="10"/>
+        </interleave>
+        <interleave output="16">
+            <part name="j2p1x4.u70" crc="0f8e5e69" map="01"/>
+            <part name="j2p1x3.u69" crc="8763ebca" map="10"/>
+        </interleave>
+
+        <!-- sub -->
+        <interleave output="16">
+            <part name="j2p1x6.u87" crc="594224f9" map="01"/>
+            <part name="j2p1x5.u86" crc="dc897725" map="10"/>
+        </interleave>
+
+        <!-- view2 -->
+        <part name="jc-200.00" crc="1f30c24e"/>
+
+        <!-- ymz -->
+        <part name="jc-301-00.85" crc="9c5b3077"/>
+        <part name="jc-300-00.84" crc="13d5b1eb"/>
+        <part name="j2m1x1.u56" crc="baf6e25e"/>
+
+        <!-- spritegen1 -->
+        <part name="jc-100-00.179" crc="578d928c"/>
+        <part name="jc-101-00.180" crc="7f5e1aca"/>
+        <part name="jc-102-00.181" crc="72caaa68"/>
+        <part name="jc-103-00.182" crc="4e9e9fc9"/>
+        <part name="jc-104-00.183" crc="6b2a2e93"/>
+        <part name="jc-105-00.184" crc="73cad1f0"/>
+        <part name="jc-108-00.185" crc="67dd1131"/>
+        <interleave output="16">
+            <part name="j2g1x1.164" crc="66a7ea6a" map="01"/>
+            <part name="j2g1x2.165" crc="660e770c" map="10"/>
+        </interleave>
+        <part repeat="0x100000">00</part>
+
+        <!-- spritegen2 -->
+        <part name="jc-106-00.171" crc="bc65661b"/>
+        <part name="jc-107-00.172" crc="92a86e8b"/>
+
+        <!-- mcudata -->
+        <part name="j2d1x1.u13" crc="b2b7fc90" offset="0x10000" length="0x10000"/>
+    </rom>
+
+    <nvram index="2" size="128"/>
+</misterromdescription>

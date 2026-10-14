@@ -1,0 +1,9 @@
+db/
+incremental_db/
+out/
+*.rpt
+*.log
+*.done
+*.smsg
+*.summary
+*.tcl.out

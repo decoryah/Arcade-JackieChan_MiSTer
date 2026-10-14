@@ -1,0 +1,7 @@
+jchan_20261014: fast load (DDR3), Scale, CRT Adjust on top of 20261013b; fitter seed 2 (Jchan.qsf); quartus/sta_corners.tcl, worst setup / hold slack to
+the 96 MHz machine clock (ns):
+  slow 100 C   setup +0.296   hold +0.244
+  slow -40 C   setup +0.145   hold +0.060
+  fast 100 C   setup +4.959   hold +0.131
+  fast -40 C   setup +5.779   hold +0.037
+All four models met (20261013b missed slow -40 C setup by 9 ps).

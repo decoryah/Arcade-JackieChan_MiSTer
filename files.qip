@@ -1,0 +1,43 @@
+set_global_assignment -name SDC_FILE Jchan.sdc
+# Jchan core file list. `source`d by Jchan.qsf, so paths are plain and relative to the project directory (mister/).
+# Only real .qip files (loaded via QIP_FILE) may use $::quartus(qip_path).
+
+set_global_assignment -name SYSTEMVERILOG_FILE Jchan.sv
+set_global_assignment -name QIP_FILE rtl/pll.qip
+
+# the machine (the SDC's multicycle paths rely on jchan_cen's phase enables, see Jchan.sdc)
+set_global_assignment -name SEARCH_PATH rtl
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_snapram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_cen.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_toybox.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_m68k.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_board.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_sys.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_ymz280b.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_audio48.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_spr_dec.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_spr_band.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_spr.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_view2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_mix.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_video.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_core.sv
+
+# memory system: the SDRAM controller (physical layer of metro-mister's), the client adapters and the download loader
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_sdram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_mem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_fastload.sv
+
+# MiSTer glue: the blank raster shown while the machine is held (the OSD's "Loading" pop-up needs a sync)
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_standby.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/jchan_io.sv
+
+# CRT Adjust (rmonic79's MiSTer-CRT-Adjust, GPL-3.0 or later; modules/VENDOR.md)
+set_global_assignment -name SYSTEMVERILOG_FILE modules/crt-adjust/crt_adjust.sv
+
+# fx68k 68000 (GPL-3, Jorge Cwik); microrom.mem / nanorom.mem are found through the search path
+set_global_assignment -name SEARCH_PATH modules/cpu-fx68k
+set_global_assignment -name SYSTEMVERILOG_FILE modules/cpu-fx68k/fx68kAlu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE modules/cpu-fx68k/uaddrPla.sv
+set_global_assignment -name SYSTEMVERILOG_FILE modules/cpu-fx68k/fx68k.sv
