@@ -168,8 +168,9 @@ def mra(name, g):
     L.extend(diplines)
     L.append('    </switches>')
     L.append('')
-    # the names fix the joystick bit layout MiSTer sends (bit 4 first): the core reads buttons 1 - 4 = bits 4 - 7, start = 8, coin = 9 (Jchan.sv)
-    L.append('    <buttons names="Button 1,Button 2,Button 3,Button 4,Start,Coin" default="A,B,X,Y,Start,Select" count="4"/>')
+    # the names fix the joystick bit layout MiSTer sends (bit 4 first): the core reads buttons 1 - 4 = bits 4 - 7, start = 8, coin = 9 (Jchan.sv).
+    # jchan.cpp's own comment: BUTTON1 weak punch, BUTTON2 strong punch, BUTTON3 weak kick, BUTTON4 strong kick
+    L.append('    <buttons names="Weak Punch,Strong Punch,Weak Kick,Strong Kick,Start,Coin" default="A,B,X,Y,Start,Select" count="4"/>')
     L.append('')
     # address=: a recent Main_MiSTer assembles the stream in the DDR3 there and the core reads it back (Jchan.sv, rtl/jchan_fastload.sv: about a
     # second instead of the HPS port's minute); an older one ignores the attribute and streams the bytes as before

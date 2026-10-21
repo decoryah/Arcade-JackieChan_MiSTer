@@ -35,7 +35,7 @@
         <dip bits="7" name="Buttons Layout" ids="2+2,3+1"/>
     </switches>
 
-    <buttons names="Button 1,Button 2,Button 3,Button 4,Start,Coin" default="A,B,X,Y,Start,Select" count="4"/>
+    <buttons names="Weak Punch,Strong Punch,Weak Kick,Strong Kick,Start,Coin" default="A,B,X,Y,Start,Select" count="4"/>
 
     <rom index="0" zip="jchan.zip" md5="None" address="0x32000000">
 

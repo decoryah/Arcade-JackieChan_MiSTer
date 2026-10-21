@@ -112,7 +112,8 @@ A Main_MiSTer that ignores the attribute streams the image as before, with the s
 | 7 | Special Prize Available (`jchan`, `jchana`) / Unused (`jchan2`) | Yes, No | No |
 | 8 | Buttons Layout | 2+2, 3+1 (`jchan2` ignores it) | 3+1 |
 
-**Controls.** Joystick directions and four buttons (default mapping A / B / X / Y for buttons 1-4), Start and Coin (Select);
+**Controls.** Joystick directions and four buttons -- Weak Punch, Strong Punch, Weak Kick, Strong Kick (the driver's own names for
+buttons 1-4; default mapping A / B / X / Y) -- Start and Coin (Select);
 two players. From the keyboard: 1 / 2 start, 5 / 6 coin, 9 service, F1 / F2 the test switch, T tilt (MAME's defaults), on top of
 MiSTer's usual keyboard-as-joystick. The game's own settings live in its EEPROM: a 128-byte file `config/nvram/<MRA name>.nvm`,
 written about a second after the game stores them (at the first boot about 7 s in) and loaded again the next time.
