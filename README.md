@@ -62,9 +62,19 @@ snapshots, see "Status").
 | ![Jackie Chan - The Kung-Fu Master](docs/screenshots/jchan.png) | ![Jackie Chan in Fists of Fire](docs/screenshots/jchan2.png) |
 | Jackie Chan - The Kung-Fu Master (`jchan`; `jchana` is the same game, rev 3) | Jackie Chan in Fists of Fire (`jchan2`) |
 
+## Release history
+
+**20261014** -- the first release. The core as described under "Status"; run on a DE10-nano by the repository owner (all three sets, DIP
+switches, nvram, a 15 kHz CRT, a RetroTINK 4K in direct video, fast loading, Scale and CRT Adjust). Fitter and timing summaries:
+`releases/jchan_20261014.fit.summary`, `.sta.summary` and `.corners.txt` (setup +0.145 ns in the slowest of the four models). Before it,
+three private test builds (20261013, 20261013a, 20261013b) found and fixed the RetroTINK 4K's shaky picture in direct video: see "Video timing".
+
+**20261021** -- the MRAs name the four buttons Weak Punch, Strong Punch, Weak Kick and Strong Kick (the driver's own names for buttons 1-4;
+they were Button 1-4). Nothing else changed: the RBF is `jchan_20261014.rbf`, the same bitstream.
+
 ## Install
 
-1. Unzip `Jchan_MiSTer_20261014.zip` over the root of the SD card (adds the MRAs to `_Arcade/` and `_Arcade/cores/jchan_20261014.rbf`),
+1. Unzip `Jchan_MiSTer_20261021.zip` over the root of the SD card (adds the MRAs to `_Arcade/` and `_Arcade/cores/jchan_20261014.rbf`),
    or copy by hand the RBF (`releases/jchan_20261014.rbf`) to `/media/fat/_Arcade/cores/` and the `.mra` files from `mra/` to
    `/media/fat/_Arcade/`. Keep the RBF's `jchan_` name and date: MiSTer finds the core by the MRA's `<rbf>` name plus the date and
    takes the newest if there are several, so delete older `jchan_*.rbf` files.

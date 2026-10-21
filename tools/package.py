@@ -5,7 +5,8 @@
   _Arcade/_alternatives/_<Title>/<set>.mra    its other versions         (mra/_alternatives/...)
   _Arcade/cores/jchan_<YYYYMMDD>[a-z].rbf     the core                   (releases/jchan_<YYYYMMDD>[a-z].rbf)
 
-  python tools/package.py [test] [YYYYMMDD[a-z]]   (default: the newest RBF in releases/; `test`: in releases/test/, zip named ..._TEST_...)
+  python tools/package.py [test] [YYYYMMDD[a-z]] [--tag TAG]   (default: the newest RBF in releases/; `test`: in releases/test/, zip named ..._TEST_...;
+                                                                `--tag`: name the zip after a release that did not change the RBF, e.g. MRA-only)
 
 Writes dist/Jchan_MiSTer_<YYYYMMDD>.zip (dist/ is not in the repository: attach the zip to the GitHub release). Unzip it over the root of the
 SD card. No ROMs are in it: the MAME 0.289 romsets go to /media/fat/games/mame/. The optional letter after the date is for a second build on the
@@ -26,6 +27,11 @@ def main(argv):
     test = bool(argv) and argv[0] == 'test'               # `package.py test [date]`: the builds in releases/test/ (not yet tried on hardware)
     if test:
         argv = argv[1:]
+    tag = None
+    if '--tag' in argv:
+        i = argv.index('--tag')
+        tag = argv[i + 1]
+        argv = argv[:i] + argv[i + 2:]
     rbfs = sorted(glob.glob(os.path.join(REPO, 'releases', 'test' if test else '', 'jchan_*.rbf')))
     rbfs = [r for r in rbfs if re.search(r'jchan_\d{8}[a-z]?\.rbf$', r)]
     if argv:
@@ -43,7 +49,7 @@ def main(argv):
                 mras.append((full, '_Arcade/' + os.path.relpath(full, os.path.join(REPO, 'mra')).replace(os.sep, '/')))
     mras.sort(key=lambda t: t[1].lower())
     os.makedirs(DIST, exist_ok=True)
-    out = os.path.join(DIST, 'Jchan_MiSTer_%s%s.zip' % ('TEST_' if test else '', date))
+    out = os.path.join(DIST, 'Jchan_MiSTer_%s%s.zip' % ('TEST_' if test else '', tag or date))
     with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:
         for full, arc in mras:
             z.write(full, arc)
